@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { SocketContext } from '../context/SocketContext';
 import { Edit2, Camera, UserPlus, UserCheck, Heart, MessageSquare } from 'lucide-react';
+import { MEDIA_URL } from '../config';
 
 export default function Profile({ targetUsername }) {
   const { user: currentUser, updateProfile, apiCall } = useContext(AuthContext);
@@ -112,7 +113,7 @@ export default function Profile({ targetUsername }) {
       {/* Banner & Avatar Area */}
       <div className="profile-banner-container">
         <img
-          src={bannerPicPreview || (profileUser.bannerPic ? `http://localhost:5000${profileUser.bannerPic}` : `https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200&auto=format&fit=crop`)}
+          src={bannerPicPreview || (profileUser.bannerPic ? `${MEDIA_URL}${profileUser.bannerPic}` : `https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200&auto=format&fit=crop`)}
           alt="Banner"
           className="profile-banner"
         />
@@ -140,7 +141,7 @@ export default function Profile({ targetUsername }) {
 
         <div className="profile-avatar-container">
           <img
-            src={profilePicPreview || (profileUser.profilePic ? `http://localhost:5000${profileUser.profilePic}` : `https://api.dicebear.com/7.x/bottts/svg?seed=${profileUser.username}`)}
+            src={profilePicPreview || (profileUser.profilePic ? `${MEDIA_URL}${profileUser.profilePic}` : `https://api.dicebear.com/7.x/bottts/svg?seed=${profileUser.username}`)}
             alt={profileUser.username}
             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           />
@@ -288,7 +289,7 @@ export default function Profile({ targetUsername }) {
                   <div className="post-author">
                     <div style={{ width: '40px', height: '40px', borderRadius: '50%', overflow: 'hidden' }}>
                       <img
-                        src={profileUser.profilePic ? `http://localhost:5000${profileUser.profilePic}` : `https://api.dicebear.com/7.x/bottts/svg?seed=${profileUser.username}`}
+                        src={profileUser.profilePic ? `${MEDIA_URL}${profileUser.profilePic}` : `https://api.dicebear.com/7.x/bottts/svg?seed=${profileUser.username}`}
                         alt={profileUser.username}
                         style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                       />
@@ -303,7 +304,7 @@ export default function Profile({ targetUsername }) {
                 {post.content && <p className="post-content">{post.content}</p>}
                 
                 {post.mediaUrl && (
-                  <img src={`http://localhost:5000${post.mediaUrl}`} alt="Post content" className="post-media" />
+                  <img src={`${MEDIA_URL}${post.mediaUrl}`} alt="Post content" className="post-media" />
                 )}
 
                 <div className="post-actions" style={{ border: 'none', paddingTop: 0 }}>
@@ -331,7 +332,7 @@ export default function Profile({ targetUsername }) {
               <div key={f._id} className="glass-card" style={{ display: 'flex', alignItems: 'center', gap: '1rem', padding: '1rem' }}>
                 <div style={{ width: '42px', height: '42px', borderRadius: '50%', overflow: 'hidden' }}>
                   <img
-                    src={f.profilePic ? `http://localhost:5000${f.profilePic}` : `https://api.dicebear.com/7.x/bottts/svg?seed=${f.username}`}
+                    src={f.profilePic ? `${MEDIA_URL}${f.profilePic}` : `https://api.dicebear.com/7.x/bottts/svg?seed=${f.username}`}
                     alt={f.username}
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   />
@@ -357,7 +358,7 @@ export default function Profile({ targetUsername }) {
               <div key={f._id} className="glass-card" style={{ display: 'flex', alignItems: 'center', gap: '1rem', padding: '1rem' }}>
                 <div style={{ width: '42px', height: '42px', borderRadius: '50%', overflow: 'hidden' }}>
                   <img
-                    src={f.profilePic ? `http://localhost:5000${f.profilePic}` : `https://api.dicebear.com/7.x/bottts/svg?seed=${f.username}`}
+                    src={f.profilePic ? `${MEDIA_URL}${f.profilePic}` : `https://api.dicebear.com/7.x/bottts/svg?seed=${f.username}`}
                     alt={f.username}
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   />

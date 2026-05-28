@@ -2,7 +2,7 @@ const fetch = globalThis.fetch || require('node-fetch');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
-const API_URL = process.env.API_URL || process.env.VITE_API_URL || 'http://localhost:5000/api';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 // Test Data
 const userA = {

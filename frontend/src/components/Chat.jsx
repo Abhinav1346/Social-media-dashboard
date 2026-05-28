@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { SocketContext } from '../context/SocketContext';
 import { Send, Smile, User, AlertCircle } from 'lucide-react';
+import { MEDIA_URL } from '../config';
 
 export default function Chat() {
   const { user: currentUser, apiCall } = useContext(AuthContext);
@@ -133,7 +134,7 @@ export default function Chat() {
                 >
                   <div className="avatar-wrapper">
                     <img
-                      src={contact.profilePic ? `http://localhost:5000${contact.profilePic}` : `https://api.dicebear.com/7.x/bottts/svg?seed=${contact.username}`}
+                      src={contact.profilePic ? `${MEDIA_URL}${contact.profilePic}` : `https://api.dicebear.com/7.x/bottts/svg?seed=${contact.username}`}
                       alt={contact.username}
                       className="avatar"
                     />
@@ -174,7 +175,7 @@ export default function Chat() {
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                 <div className="avatar-wrapper" style={{ width: '42px', height: '42px' }}>
                   <img
-                    src={activePartner.profilePic ? `http://localhost:5000${activePartner.profilePic}` : `https://api.dicebear.com/7.x/bottts/svg?seed=${activePartner.username}`}
+                    src={activePartner.profilePic ? `${MEDIA_URL}${activePartner.profilePic}` : `https://api.dicebear.com/7.x/bottts/svg?seed=${activePartner.username}`}
                     alt={activePartner.username}
                     className="avatar"
                   />

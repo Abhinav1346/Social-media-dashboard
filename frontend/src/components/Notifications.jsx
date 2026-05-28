@@ -1,6 +1,7 @@
 import React, { useEffect, useContext } from 'react';
 import { SocketContext } from '../context/SocketContext';
 import { Bell, Heart, MessageSquare, UserCheck, MessageCircle, RefreshCw } from 'lucide-react';
+import { MEDIA_URL } from '../config';
 
 export default function Notifications({ onSelectUser }) {
   const { notifications, markNotificationsRead } = useContext(SocketContext);
@@ -124,7 +125,7 @@ export default function Notifications({ onSelectUser }) {
               {notification.post && notification.post.mediaUrl && (
                 <div style={{ width: '40px', height: '40px', borderRadius: '8px', overflow: 'hidden', border: '1px solid var(--border-color)' }}>
                   <img
-                    src={`http://localhost:5000${notification.post.mediaUrl}`}
+                    src={`${MEDIA_URL}${notification.post.mediaUrl}`}
                     alt="Post thumbnail"
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   />

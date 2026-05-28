@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { SocketContext } from '../context/SocketContext';
+import { MEDIA_URL } from '../config';
 import {
   Rss,
   MessageSquare,
@@ -101,7 +102,7 @@ export default function Sidebar({ activeTab, setActiveTab }) {
           }}>
             <div style={{ width: '40px', height: '40px', borderRadius: '50%', overflow: 'hidden' }}>
               <img
-                src={user.profilePic ? `http://localhost:5000${user.profilePic}` : `https://api.dicebear.com/7.x/bottts/svg?seed=${user.username}`}
+                src={user.profilePic ? `${MEDIA_URL}${user.profilePic}` : `https://api.dicebear.com/7.x/bottts/svg?seed=${user.username}`}
                 alt={user.username}
                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               />

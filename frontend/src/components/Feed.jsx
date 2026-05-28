@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { SocketContext } from '../context/SocketContext';
 import { Heart, MessageSquare, Image, Send, X, Plus, Check } from 'lucide-react';
+import { MEDIA_URL } from '../config';
 
 export default function Feed({ onSelectUser }) {
   const { user, apiCall, API_URL } = useContext(AuthContext);
@@ -238,7 +239,7 @@ export default function Feed({ onSelectUser }) {
                   <div className="post-author" onClick={() => onSelectUser(post.user.username)}>
                     <div style={{ width: '42px', height: '42px', borderRadius: '50%', overflow: 'hidden' }}>
                       <img
-                        src={post.user.profilePic ? `http://localhost:5000${post.user.profilePic}` : `https://api.dicebear.com/7.x/bottts/svg?seed=${post.user.username}`}
+                        src={post.user.profilePic ? `${MEDIA_URL}${post.user.profilePic}` : `https://api.dicebear.com/7.x/bottts/svg?seed=${post.user.username}`}
                         alt={post.user.username}
                         style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                       />
@@ -255,7 +256,7 @@ export default function Feed({ onSelectUser }) {
                 
                 {/* Media Attachment */}
                 {post.mediaUrl && (
-                  <img src={`http://localhost:5000${post.mediaUrl}`} alt="Post content" className="post-media" />
+                  <img src={`${MEDIA_URL}${post.mediaUrl}`} alt="Post content" className="post-media" />
                 )}
 
                 {/* Interaction Actions */}
@@ -287,7 +288,7 @@ export default function Feed({ onSelectUser }) {
                           <div key={comment._id} className="comment-item">
                             <div style={{ width: '28px', height: '28px', borderRadius: '50%', overflow: 'hidden' }}>
                               <img
-                                src={comment.user.profilePic ? `http://localhost:5000${comment.user.profilePic}` : `https://api.dicebear.com/7.x/bottts/svg?seed=${comment.user.username}`}
+                                src={comment.user.profilePic ? `${MEDIA_URL}${comment.user.profilePic}` : `https://api.dicebear.com/7.x/bottts/svg?seed=${comment.user.username}`}
                                 alt={comment.user.username}
                                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                               />
@@ -346,7 +347,7 @@ export default function Feed({ onSelectUser }) {
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', cursor: 'pointer' }} onClick={() => onSelectUser(suggestion.username)}>
                       <div style={{ width: '36px', height: '36px', borderRadius: '50%', overflow: 'hidden' }}>
                         <img
-                          src={suggestion.profilePic ? `http://localhost:5000${suggestion.profilePic}` : `https://api.dicebear.com/7.x/bottts/svg?seed=${suggestion.username}`}
+                          src={suggestion.profilePic ? `${MEDIA_URL}${suggestion.profilePic}` : `https://api.dicebear.com/7.x/bottts/svg?seed=${suggestion.username}`}
                           alt={suggestion.username}
                           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                         />

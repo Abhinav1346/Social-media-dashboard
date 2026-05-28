@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import { io } from 'socket.io-client';
 import { AuthContext } from './AuthContext';
+import { SOCKET_URL } from '../config';
 
 export const SocketContext = createContext();
 
@@ -25,8 +26,8 @@ export const SocketProvider = ({ children }) => {
       return;
     }
 
-    const socketUrl = 'http://localhost:5000';
-    const newSocket = io(socketUrl, {
+    const newSocket = io(SOCKET_URL, {
+
       auth: { token },
     });
 

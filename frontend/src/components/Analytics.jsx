@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { BarChart3, TrendingUp, Users, Heart, MessageSquare, Eye } from 'lucide-react';
+import { MEDIA_URL } from '../config';
 
 export default function Analytics() {
   const { apiCall } = useContext(AuthContext);
@@ -287,7 +288,7 @@ export default function Analytics() {
                   </p>
                   {post.mediaUrl && (
                     <img
-                      src={`http://localhost:5000${post.mediaUrl}`}
+                      src={`${MEDIA_URL}${post.mediaUrl}`}
                       alt="Thumbnail"
                       style={{ width: '100%', height: '100px', objectFit: 'cover', borderRadius: '8px', marginTop: '0.75rem' }}
                     />
