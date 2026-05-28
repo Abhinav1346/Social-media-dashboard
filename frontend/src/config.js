@@ -1,6 +1,6 @@
 // Central Configuration for Production/Development URLs
 
-const PRODUCTION_BACKEND_URL = "https://social-media-dashboard-backend-6pb0.onrender.com";
+const PRODUCTION_BACKEND_URL = "https://social-media-dashboard-backend-6pb0.onrender.com/api";
 const configuredApiUrl = import.meta.env.VITE_API_URL;
 const isLocalApiUrl = configuredApiUrl?.includes("localhost") || configuredApiUrl?.includes("127.0.0.1");
 
