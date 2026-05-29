@@ -7,6 +7,7 @@ require('dotenv').config({ path: path.join(__dirname, '../.env.local'), override
 
 const connectDB = require('./config/db');
 const { initRedis } = require('./config/redis');
+const { corsOrigin } = require('./config/cors');
 
 // Initialize Express
 const app = express();
@@ -15,7 +16,7 @@ const server = http.createServer(app);
 // Enable CORS
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || 'http://localhost:5173',
+    origin: corsOrigin,
     credentials: true,
   })
 );

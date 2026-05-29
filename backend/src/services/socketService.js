@@ -4,6 +4,7 @@ const User = require('../models/User');
 const Message = require('../models/Message');
 const Notification = require('../models/Notification');
 const { getSubClient } = require('../config/redis');
+const { corsOrigin } = require('../config/cors');
 
 // Keep track of active online users: Map<userId, socketId>
 const onlineUsers = new Map();
@@ -11,7 +12,7 @@ const onlineUsers = new Map();
 const initSocket = (server) => {
   const io = socketIO(server, {
     cors: {
-      origin: process.env.CLIENT_URL || 'http://localhost:5173',
+      origin: corsOrigin,
       methods: ['GET', 'POST'],
     },
   });
