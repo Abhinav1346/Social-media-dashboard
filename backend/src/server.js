@@ -3,6 +3,7 @@ const http = require('http');
 const cors = require('cors');
 const path = require('path');
 require('dotenv').config();
+require('dotenv').config({ path: path.join(__dirname, '../.env.local'), override: true });
 
 const connectDB = require('./config/db');
 const { initRedis } = require('./config/redis');

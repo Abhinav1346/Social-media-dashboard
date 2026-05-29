@@ -25,65 +25,67 @@ export const AuthProvider = ({ children }) => {
   const apiCall = async (endpoint, options = {}) => {
     const headers = options.headers || {};
     const authToken = token || localStorage.getItem('token');
+    const controller = new AbortController();
+    const timeoutId = window.setTimeout(() => controller.abort(), 15000);
     
     if (authToken) {
       headers['Authorization'] = `Bearer ${authToken}`;
     }
 
-    const response = await fetch(`${API_URL}${endpoint}`, {
-      ...options,
-      headers,
-    });
+    try {
+      const response = await fetch(`${API_URL}${endpoint}`, {
+        ...options,
+        headers,
+        signal: controller.signal,
+      });
 
-    const data = await response.json();
-    if (!response.ok) {
-      throw new Error(data.message || 'Something went wrong');
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.message || 'Something went wrong');
+      }
+      return data;
+    } catch (error) {
+      if (error.name === 'AbortError') {
+        throw new Error('Backend did not respond. Please make sure the server is running on port 5000.');
+      }
+      throw error;
+    } finally {
+      window.clearTimeout(timeoutId);
     }
-    return data;
   };
 
   // Register User
   const register = async (username, email, password) => {
-    setLoading(true);
-    try {
-      const res = await apiCall('/auth/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, email, password }),
-      });
+    const res = await apiCall('/auth/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, email, password }),
+    });
 
-      if (res.success) {
-        setUser(res.data);
-        setToken(res.data.token);
-        localStorage.setItem('token', res.data.token);
-        localStorage.setItem('user', JSON.stringify(res.data));
-      }
-      return res;
-    } finally {
-      setLoading(false);
+    if (res.success) {
+      setUser(res.data);
+      setToken(res.data.token);
+      localStorage.setItem('token', res.data.token);
+      localStorage.setItem('user', JSON.stringify(res.data));
     }
+    return res;
   };
 
   // Login User
   const login = async (email, password) => {
-    setLoading(true);
-    try {
-      const res = await apiCall('/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-      });
+    const res = await apiCall('/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password }),
+    });
 
-      if (res.success) {
-        setUser(res.data);
-        setToken(res.data.token);
-        localStorage.setItem('token', res.data.token);
-        localStorage.setItem('user', JSON.stringify(res.data));
-      }
-      return res;
-    } finally {
-      setLoading(false);
+    if (res.success) {
+      setUser(res.data);
+      setToken(res.data.token);
+      localStorage.setItem('token', res.data.token);
+      localStorage.setItem('user', JSON.stringify(res.data));
     }
+    return res;
   };
 
   // Logout User

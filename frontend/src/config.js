@@ -1,14 +1,18 @@
 // Central Configuration for Production/Development URLs
 
-const PRODUCTION_BACKEND_URL = "https://social-media-dashboard-backend-6pb0.onrender.com/api";
-const configuredApiUrl = import.meta.env.VITE_API_URL;
+const PRODUCTION_BACKEND_ORIGIN = "https://social-media-dashboard-backend-6pb0.onrender.com";
+const DEVELOPMENT_BACKEND_ORIGIN = "http://localhost:5000";
+const configuredApiUrl = import.meta.env.VITE_API_URL?.replace(/\/$/, "");
 const isLocalApiUrl = configuredApiUrl?.includes("localhost") || configuredApiUrl?.includes("127.0.0.1");
-
-export const API_URL =
+const apiUrl =
   configuredApiUrl && !(import.meta.env.PROD && isLocalApiUrl)
     ? configuredApiUrl
-    : `${PRODUCTION_BACKEND_URL}/api`;
+    : `${import.meta.env.DEV ? DEVELOPMENT_BACKEND_ORIGIN : PRODUCTION_BACKEND_ORIGIN}/api`;
 
-export const SOCKET_URL = PRODUCTION_BACKEND_URL;
+const backendOrigin = apiUrl.replace(/\/api$/, "");
 
-export const MEDIA_URL = PRODUCTION_BACKEND_URL;
+export const API_URL = apiUrl;
+
+export const SOCKET_URL = backendOrigin;
+
+export const MEDIA_URL = backendOrigin;
